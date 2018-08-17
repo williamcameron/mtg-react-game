@@ -1,0 +1,7 @@
+{
+    "rules": {
+        "extends": "eslint:recommended",
+        "semi": ["error", "always"],
+        "quotes": ["error", "double"]
+    }
+}
