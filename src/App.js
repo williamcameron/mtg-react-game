@@ -5,9 +5,13 @@ class App extends Component {
 
   constructor(props){
     super(props);
-    this.state = {
-      something: 'World!'
-    };
+    this.state = { something: '' };
+  }
+
+  componentWillMount(){
+    this.setState({
+      something: 'World!!'
+    })
   }
 
   render() {
