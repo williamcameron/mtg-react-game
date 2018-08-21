@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Game from './features/game';
 import './App.css';
 
 class App extends Component {
@@ -17,8 +18,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <h1>Hello</h1>
-        <p>{this.state.something}</p>
+        <Game myProp={this.state.something} />
       </div>
     );
   }
