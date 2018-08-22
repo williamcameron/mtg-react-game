@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './Deck.css';
 
 class Deck extends Component {
 

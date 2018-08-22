@@ -1,0 +1,10 @@
+.Game {
+    border: 1px solid black;
+    padding: 5px;
+}
+
+ul {
+    list-style: none;
+    border: 1px black dashed;
+    width: 10em;
+}

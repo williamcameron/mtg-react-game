@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import Deck from '../deck';
 import Hand from '../hand';
 
+import './Game.css';
+
+
 class Game extends Component {
 
     render() {
