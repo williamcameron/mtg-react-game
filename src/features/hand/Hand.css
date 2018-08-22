@@ -1,4 +1,5 @@
 .Hand {
     border: 1px purple dotted;
     padding: 10px;
+    flex: 1;
 }
