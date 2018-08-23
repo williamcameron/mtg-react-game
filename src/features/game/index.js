@@ -10,8 +10,14 @@ class Game extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            'cards': {}
+            
         };
+    }
+
+    componentWillMount() {
+        this.setState({
+           
+        });
     }
 
     render() {
