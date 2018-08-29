@@ -1,5 +1,13 @@
 const initialState = {
-    cards: []
+    cards: [{
+        name: 'Forest'
+    }, 
+    {
+        name: 'Forest'
+    }, 
+    {
+        name: 'Forest'
+    }]
 };
 
 const deckReducer = (state = initialState, action) => {
