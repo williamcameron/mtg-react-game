@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Game from './features/game';
 import './App.css';
+import draw from './features/deck/draw';
 
 class App extends Component {
 
@@ -13,12 +14,19 @@ class App extends Component {
     this.setState({
       something: 'World!!'
     })
+
+
+  }
+
+  onClick() {
+    draw();
   }
 
   render() {
     return (
       <div className="App">
         <Game myProp={this.state.something} />
+        <div onClick={ this.onClick }>Draw Card</div> 
       </div>
     );
   }
