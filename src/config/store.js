@@ -1,8 +1,10 @@
 import { createStore, combineReducers } from 'redux';
 import deckReducer from '../features/deck/reducer';
+import handReducer from '../features/hand/reducer';
 
 const rootReducer = combineReducers({
-    deck: deckReducer
+    deck: deckReducer,
+    hand: handReducer
 });
 
 const store = createStore(

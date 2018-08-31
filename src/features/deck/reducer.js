@@ -15,13 +15,11 @@ const deckReducer = (state = initialState, action) => {
     switch (action.type) {
         default:
             return state;
-        case 'DRAW_CARD':
-            let popped_card =  state.cards.pop(); // draw a card
-            
+        case 'REMOVE_TOP_CARD':
+            state.deck.cards.pop();
             return {
                 ...state,
-                floating_card: popped_card, // should this be in the redux store? how do we access it from our action
-                ...action.payload
+                
             };
     }
 };
