@@ -7,8 +7,11 @@ class Hand extends Component {
        <div className="Hand">
             <h2>Hand</h2>
             <ul>
-                <li>Card One</li>
-                <li>Card One</li>
+                {
+                this.props.hand.map((card) => (
+                    <li>{ card.name }</li>
+                ))
+                }
             </ul>
         </div>
        );
