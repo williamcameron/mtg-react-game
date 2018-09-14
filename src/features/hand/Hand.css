@@ -3,3 +3,7 @@
     padding: 10px;
     flex: 1;
 }
+
+ul {
+    display: flex;
+}

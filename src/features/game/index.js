@@ -10,17 +10,21 @@ class Game extends Component {
         super(props);
         this.state = {
             deck: [{
-                name: 'Forest'
+                name: 'Forest',
+                image: 'forest.jpg'
             }, 
             {
-                name: 'Forest'
+                name: 'Forest',
+                image: 'forest.jpg'
             }, 
             {
-                name: 'Forest'
+                name: 'Forest',
+                image: 'forest.jpg'
             }],
             hand: [
             {
-                name: 'Forest'
+                name: 'Forest',
+                image: 'forest.jpg'
             }
             ]
         };
@@ -30,20 +34,22 @@ class Game extends Component {
 
 
     onClick(){
-        let popped = this.state.deck.pop();
-        let hand = this.state.hand;
-        hand.push(popped);
-        this.setState({
-            hand
-        });
+        if(this.state.deck.length){
+            let popped = this.state.deck.pop();
+            let hand = this.state.hand;
+            hand.push(popped);
+            this.setState({
+                hand
+            });
+        } else {
+            alert('Nae cards left');
+        }
     }
     render() {
        return (
        <div className="Game">
-            <Deck deck={ this.state.deck }/>
+            <Deck deck={ this.state.deck } onClick={ this.onClick } />
             <Hand hand={ this.state.hand }/>
-
-            <div onClick={ this.onClick }>Draw Card</div> 
         </div>
        );
     }

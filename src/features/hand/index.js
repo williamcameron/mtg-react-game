@@ -9,7 +9,9 @@ class Hand extends Component {
             <ul>
                 {
                 this.props.hand.map((card) => (
-                    <li>{ card.name }</li>
+                    <li>
+                        <img width="200" src={ card.image } title={ card.name }></img>
+                    </li>
                 ))
                 }
             </ul>

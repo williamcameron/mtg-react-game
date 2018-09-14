@@ -8,13 +8,9 @@ class Deck extends Component {
         return (
             <div className="Deck">
                 <h2>Deck</h2>
-                <ul>
-                    {
-                        this.props.deck.map((card) => (
-                            <li>{ card.name }</li>
-                        ))
-                    }
-                </ul>
+                <div onClick={ this.props.onClick }>
+                    <img width="200" src='card_back.jpg' title={this.props.deck.length}></img>
+                </div>
             </div>
         );
                
