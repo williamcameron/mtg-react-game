@@ -9,7 +9,7 @@ class Deck extends Component {
             <div className="Deck">
                 <h2>Deck</h2>
                 <div onClick={ this.props.onClick }>
-                    <img width="200" src='card_back.jpg' title={this.props.deck.length}></img>
+                    <img width="200" src='card_back.jpg' title={this.props.cards.length} alt={this.props.cards.length}></img>
                 </div>
             </div>
         );

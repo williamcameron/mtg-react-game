@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import './Hand.css';
-class Hand extends Component {
+import './Graveyard.css';
+class Graveyard extends Component {
 
     render() {
        return (
-       <div className="Hand">
-            <h2>Hand</h2>
+       <div className="Graveyard">
+            <h2>Graveyard</h2>
             <ul>
                 {
                 this.props.cards.map((card) => (
@@ -21,4 +21,4 @@ class Hand extends Component {
 }
 
 
-export default Hand;
+export default Graveyard;
