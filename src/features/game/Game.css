@@ -1,13 +1,9 @@
 .Game {
-    border: 1px solid black;
-    padding: 5px;
     display: flex;
 }
 
 ul {
     list-style: none;
-    border: 1px black dashed;
-    width: 10em;
 }
 
 .tapped {
@@ -27,4 +23,8 @@ ul {
 .cardZone { 
     width: 30%;
     flex: 3;
+}
+
+.Battlefield, .Deck, .Hand, .Graveyard {
+    min-height: 340px;
 }

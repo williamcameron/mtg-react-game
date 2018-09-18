@@ -1,7 +1,6 @@
 .Graveyard {
-    border: 1px purple dotted;
-    padding: 10px;
     flex: 2;
+    visibility: hidden;
 }
 
 ul {

@@ -5,7 +5,6 @@ class Graveyard extends Component {
     render() {
        return (
        <div className="Graveyard">
-            <h2>Graveyard</h2>
             <ul>
                 {
                 this.props.cards.map((card) => (

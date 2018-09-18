@@ -13,24 +13,10 @@ class Game extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            deck: [{
-                name: 'Forest',
-                image: 'forest.jpg'
-            }, 
-            {
-                name: 'Forest',
-                image: 'forest.jpg'
-            }, 
-            {
-                name: 'Forest',
-                image: 'forest.jpg'
-            }],
+            deck: [],
             hand: [],
             graveyard: [],
-            battlefield: [{
-                name: 'Forest',
-                image: 'forest.jpg'
-            }]
+            battlefield: []
         };
 
         this.drawCardFromDeckToHand = this.drawCardFromDeckToHand.bind(this);
@@ -38,6 +24,12 @@ class Game extends Component {
         this.tapUntapCard = this.tapUntapCard.bind(this);
         
         
+    }
+
+    componentDidMount(){
+        let deck = this.getDeck();
+        this.shuffle(deck); // can we change to utilise eg. lodash?
+        this.setState({deck})
     }
 
 
@@ -91,6 +83,55 @@ class Game extends Component {
         </div>
        );
     }
+
+
+
+
+
+
+
+    getDeck(){ 
+        
+        let cards = Array();
+        let d =  [{
+            name: 'Forest',
+            image: 'forest.jpg'
+        }, 
+        {
+            name: 'Forest',
+            image: 'forest.jpg'
+        }, 
+        {
+            name: 'Forest',
+            image: 'forest.jpg'
+        }, 
+        {
+            name: 'Runeclaw Bear',
+            image: 'runeclaw-bear.jpg'
+        }];
+        for(let i=0;i<25;i++){
+            cards.push({
+                name: 'Forest',
+                image: 'forest.jpg'
+            });
+        }
+        for(let i=0;i<15;i++){
+            cards.push({
+                name: 'Runeclaw Bear',
+                image: 'runeclaw-bear.jpg'
+            });
+        }
+        return cards;
+    }
+
+    shuffle(a) {
+        for (let i = a.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [a[i], a[j]] = [a[j], a[i]];
+        }
+        return a;
+    }
+
 }
 
 

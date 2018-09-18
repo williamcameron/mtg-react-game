@@ -5,12 +5,12 @@ class Hand extends Component {
     render() {
        return (
        <div className="Hand">
-            <h2>Hand</h2>
+            <h2>Hand ({this.props.cards.length} cards)</h2>
             <ul>
                 {
                 this.props.cards.map((card) => (
                     <li>
-                        <img width="200" src={ card.image } title={ card.name } alt={ card.name }  onClick={ this.props.onClick }></img>
+                        <img width="150" src={ card.image } title={ card.name } alt={ card.name }  onClick={ this.props.onClick }></img>
                     </li>
                 ))
                 }
