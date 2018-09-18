@@ -75,10 +75,19 @@ class Game extends Component {
     render() {
        return (
        <div className="Game">
-            <Battlefield cards={this.state.battlefield } onClick={ this.tapUntapCard } />
-            <Deck cards={ this.state.deck } onClick={ this.drawCardFromDeckToHand } />
-            <Hand cards={ this.state.hand } onClick={ this.moveCardFromHandToBattlefield }/>
-            <Graveyard cards={this.state.graveyard } />
+            <div>
+                <div className="opponentZone"></div>
+                <div className="playerZone">
+                    <div className="gameZone">
+                        <Battlefield cards={this.state.battlefield } onClick={ this.tapUntapCard } />
+                        <Hand cards={ this.state.hand } onClick={ this.moveCardFromHandToBattlefield }/>
+                    </div>
+                    <div className="cardZone">
+                        <Deck cards={ this.state.deck } onClick={ this.drawCardFromDeckToHand } />
+                        <Graveyard cards={this.state.graveyard } />
+                    </div>
+                </div>
+            </div>
         </div>
        );
     }

@@ -13,3 +13,18 @@ ul {
 .tapped {
     transform: rotate(90deg);
 }
+
+
+.playerZone {
+    width: 1000px;
+    height: 60%;
+    display:flex;
+}
+.gameZone {
+    width: 70%;
+    flex: 7;
+}
+.cardZone { 
+    width: 30%;
+    flex: 3;
+}
