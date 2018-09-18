@@ -27,10 +27,17 @@ class Game extends Component {
             }],
             hand: [],
             graveyard: [],
-            battlefield: []
+            battlefield: [{
+                name: 'Forest',
+                image: 'forest.jpg'
+            }]
         };
 
         this.drawCardFromDeckToHand = this.drawCardFromDeckToHand.bind(this);
+        this.moveCardFromHandToBattlefield = this.moveCardFromHandToBattlefield.bind(this);
+        this.tapUntapCard = this.tapUntapCard.bind(this);
+        
+        
     }
 
 
@@ -43,16 +50,34 @@ class Game extends Component {
                 hand
             });
         } else {
-            alert('Nae cards left');
+            alert('Nae cards left in deck');
+        }
+    }
+    tapUntapCard(card) {
+        card.tapped =  !card.tapped;
+        this.setState({
+            card
+        })
+    }
+    moveCardFromHandToBattlefield(){
+        if(this.state.hand.length){
+            let popped = this.state.hand.pop();
+            let battlefield = this.state.battlefield;
+            battlefield.push(popped);
+            this.setState({
+                battlefield
+            });
+        } else {
+            alert('Nae cards left in hand');
         }
     }
 
     render() {
        return (
        <div className="Game">
-            <Battlefield cards={this.state.battlefield } />
+            <Battlefield cards={this.state.battlefield } onClick={ this.tapUntapCard } />
             <Deck cards={ this.state.deck } onClick={ this.drawCardFromDeckToHand } />
-            <Hand cards={ this.state.hand }/>
+            <Hand cards={ this.state.hand } onClick={ this.moveCardFromHandToBattlefield }/>
             <Graveyard cards={this.state.graveyard } />
         </div>
        );

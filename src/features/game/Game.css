@@ -9,3 +9,7 @@ ul {
     border: 1px black dashed;
     width: 10em;
 }
+
+.tapped {
+    transform: rotate(90deg);
+}

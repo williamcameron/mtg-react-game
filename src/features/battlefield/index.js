@@ -9,7 +9,7 @@ class Battlefield extends Component {
             <ul>
                 {
                 this.props.cards.map((card) => (
-                    <li>
+                    <li onClick={ this.props.onClick.bind(this, card) } className={card.tapped?'tapped':''}>
                         <img width="200" src={ card.image } title={ card.name } alt={ card.name }></img>
                     </li>
                 ))

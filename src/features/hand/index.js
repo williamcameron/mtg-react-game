@@ -10,7 +10,7 @@ class Hand extends Component {
                 {
                 this.props.cards.map((card) => (
                     <li>
-                        <img width="200" src={ card.image } title={ card.name } alt={ card.name }></img>
+                        <img width="200" src={ card.image } title={ card.name } alt={ card.name }  onClick={ this.props.onClick }></img>
                     </li>
                 ))
                 }
