@@ -51,13 +51,17 @@ class Game extends Component {
             card
         })
     }
-    moveCardFromHandToBattlefield(){
+    moveCardFromHandToBattlefield(cardToMove){
         if(this.state.hand.length){
-            let popped = this.state.hand.pop();
+
+            let theOne = this.state.hand.filter((card, i) => i==cardToMove);
+            let theRest = this.state.hand.filter((card, i) => i!=cardToMove);
+            
             let battlefield = this.state.battlefield;
-            battlefield.push(popped);
+            battlefield.push(theOne[0]);
             this.setState({
-                battlefield
+                battlefield,
+                hand: theRest
             });
         } else {
             alert('Nae cards left in hand');
@@ -72,7 +76,7 @@ class Game extends Component {
                 <div className="playerZone">
                     <div className="gameZone">
                         <Battlefield cards={this.state.battlefield } onClick={ this.tapUntapCard } />
-                        <Hand cards={ this.state.hand } onClick={ this.moveCardFromHandToBattlefield }/>
+                        <Hand cards={ this.state.hand } moveCardFromHandToBattlefield={ this.moveCardFromHandToBattlefield }/>
                     </div>
                     <div className="cardZone">
                         <Deck cards={ this.state.deck } onClick={ this.drawCardFromDeckToHand } />
