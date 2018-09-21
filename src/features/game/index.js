@@ -16,7 +16,8 @@ class Game extends Component {
             deck: [],
             hand: [],
             graveyard: [],
-            battlefield: []
+            battlefield: [],
+            mana: 0
         };
 
         this.drawCardFromDeckToHand = this.drawCardFromDeckToHand.bind(this);
@@ -46,9 +47,18 @@ class Game extends Component {
         }
     }
     tapUntapCard(card) {
+        let mana;
+
         card.tapped =  !card.tapped;
+
+        if (card.tapped) {
+            mana = this.state.mana;
+            mana++;
+        }
+
         this.setState({
-            card
+            card,
+            mana
         })
     }
     moveCardFromHandToBattlefield(cardToMove){
@@ -81,6 +91,11 @@ class Game extends Component {
                     <div className="cardZone">
                         <Deck cards={ this.state.deck } onClick={ this.drawCardFromDeckToHand } />
                         <Graveyard cards={this.state.graveyard } />
+                        {
+                            [1,2,3,4,5].map(() => (
+                                <span>hi</span> 
+                            ))
+                        }
                     </div>
                 </div>
             </div>
@@ -97,32 +112,22 @@ class Game extends Component {
     getDeck(){ 
         
         let cards = Array();
-        let d =  [{
-            name: 'Forest',
-            image: 'forest.jpg'
-        }, 
-        {
-            name: 'Forest',
-            image: 'forest.jpg'
-        }, 
-        {
-            name: 'Forest',
-            image: 'forest.jpg'
-        }, 
-        {
-            name: 'Runeclaw Bear',
-            image: 'runeclaw-bear.jpg'
-        }];
         for(let i=0;i<25;i++){
             cards.push({
                 name: 'Forest',
-                image: 'forest.jpg'
+                image: 'forest.jpg',
+                tapped: false,
+                land: true,
+                creature: false,
             });
         }
         for(let i=0;i<15;i++){
             cards.push({
                 name: 'Runeclaw Bear',
-                image: 'runeclaw-bear.jpg'
+                image: 'runeclaw-bear.jpg',
+                tapped: false,
+                land: false,
+                creature: true,
             });
         }
         return cards;
