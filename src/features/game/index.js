@@ -3,7 +3,7 @@ import Deck from '../deck';
 import Hand from '../hand';
 import Battlefield from '../battlefield';
 import Graveyard from '../graveyard';
-
+import Mana from '../mana';
 
 import './Game.css';
 
@@ -17,7 +17,7 @@ class Game extends Component {
             hand: [],
             graveyard: [],
             battlefield: [],
-            mana: 0
+            mana: { 'red': 0, 'green':0 }
         };
 
         this.drawCardFromDeckToHand = this.drawCardFromDeckToHand.bind(this);
@@ -47,13 +47,16 @@ class Game extends Component {
         }
     }
     tapUntapCard(card) {
-        let mana;
+        let mana = this.state.mana;
 
         card.tapped =  !card.tapped;
-
-        if (card.tapped) {
-            mana = this.state.mana;
-            mana++;
+        
+        if(card.land){
+            if (card.tapped) {
+                mana.green++;
+            } else {
+                mana.green--;
+            }
         }
 
         this.setState({
@@ -61,11 +64,12 @@ class Game extends Component {
             mana
         })
     }
+    
     moveCardFromHandToBattlefield(cardToMove){
         if(this.state.hand.length){
 
-            let theOne = this.state.hand.filter((card, i) => i==cardToMove);
-            let theRest = this.state.hand.filter((card, i) => i!=cardToMove);
+            let theOne = this.state.hand.filter((card, i) => i===cardToMove);
+            let theRest = this.state.hand.filter((card, i) => i!==cardToMove);
             
             let battlefield = this.state.battlefield;
             battlefield.push(theOne[0]);
@@ -79,6 +83,16 @@ class Game extends Component {
     }
 
     render() {
+        // console.log(this.state.mana);
+        // var manapool = new Array(this.state.mana.green);
+        // console.log(manapool);
+
+        var manaOutput = []; 
+
+        for(var i=0; i< this.state.mana.green; i++) {
+            manaOutput.push(<Mana />);
+        }
+        
        return (
        <div className="Game">
             <div>
@@ -92,9 +106,7 @@ class Game extends Component {
                         <Deck cards={ this.state.deck } onClick={ this.drawCardFromDeckToHand } />
                         <Graveyard cards={this.state.graveyard } />
                         {
-                            [1,2,3,4,5].map(() => (
-                                <span>hi</span> 
-                            ))
+                            manaOutput
                         }
                     </div>
                 </div>
@@ -111,7 +123,7 @@ class Game extends Component {
 
     getDeck(){ 
         
-        let cards = Array();
+        let cards = [];
         for(let i=0;i<25;i++){
             cards.push({
                 name: 'Forest',
