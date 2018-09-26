@@ -23,8 +23,7 @@ class Game extends Component {
         this.drawCardFromDeckToHand = this.drawCardFromDeckToHand.bind(this);
         this.moveCardFromHandToBattlefield = this.moveCardFromHandToBattlefield.bind(this);
         this.tapUntapCard = this.tapUntapCard.bind(this);
-        
-        
+        this.error = this.error.bind(this);
     }
 
     componentDidMount(){
@@ -49,7 +48,7 @@ class Game extends Component {
     tapUntapCard(card) {
         let mana = this.state.mana;
 
-        card.tapped =  !card.tapped;
+        card.tapped = !card.tapped;
         
         if(card.land){
             if (card.tapped) {
@@ -64,18 +63,39 @@ class Game extends Component {
             mana
         })
     }
+
+    error(message) {
+        console.log(message);
+    }
     
-    moveCardFromHandToBattlefield(cardToMove){
+    moveCardFromHandToBattlefield(cardToMove) {
         if(this.state.hand.length){
 
-            let theOne = this.state.hand.filter((card, i) => i===cardToMove);
+            let theOne = this.state.hand.filter((card, i) => i===cardToMove)[0];
+            let mana = this.state.mana;
+
+
+            console.log(theOne);
+            if(theOne.creature) {
+
+                let manaConsumed = theOne.castingCost;
+
+                if (mana.green < manaConsumed) {
+                    this.error('Not enough mana');
+                   return;
+                }
+
+                mana.green -= manaConsumed;
+            }
+
             let theRest = this.state.hand.filter((card, i) => i!==cardToMove);
             
             let battlefield = this.state.battlefield;
-            battlefield.push(theOne[0]);
+            battlefield.push(theOne);
             this.setState({
                 battlefield,
-                hand: theRest
+                hand: theRest,
+                mana
             });
         } else {
             alert('Nae cards left in hand');
@@ -83,9 +103,6 @@ class Game extends Component {
     }
 
     render() {
-        // console.log(this.state.mana);
-        // var manapool = new Array(this.state.mana.green);
-        // console.log(manapool);
 
         var manaOutput = []; 
 
@@ -105,6 +122,7 @@ class Game extends Component {
                     <div className="cardZone">
                         <Deck cards={ this.state.deck } onClick={ this.drawCardFromDeckToHand } />
                         <Graveyard cards={this.state.graveyard } />
+                        <strong>{ this.state.mana.green }</strong>
                         {
                             manaOutput
                         }
@@ -131,6 +149,7 @@ class Game extends Component {
                 tapped: false,
                 land: true,
                 creature: false,
+                castingCost: 0
             });
         }
         for(let i=0;i<15;i++){
@@ -140,6 +159,7 @@ class Game extends Component {
                 tapped: false,
                 land: false,
                 creature: true,
+                castingCost: 2
             });
         }
         return cards;
