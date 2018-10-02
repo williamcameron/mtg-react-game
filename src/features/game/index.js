@@ -17,7 +17,8 @@ class Game extends Component {
             hand: [],
             graveyard: [],
             battlefield: [],
-            mana: { 'red': 0, 'green':0 }
+            mana: { 'red': 0, 'green':0 },
+            player: { 'health': 20 }
         };
 
         this.drawCardFromDeckToHand = this.drawCardFromDeckToHand.bind(this);
