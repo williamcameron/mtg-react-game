@@ -156,7 +156,9 @@ class Game extends Component {
                     <div className="cardZone">
                         <Deck cards={ this.state.deck } onClick={ this.drawCardFromDeckToHand } />
                         <Graveyard cards={this.state.graveyard } />
-                        <strong>{ this.state.mana.green }</strong>
+                        <strong>Health: {this.state.player.health}</strong><br/>
+                        
+                        <strong>Mana: { this.state.mana.green }</strong>
                         {
                             manaOutput
                         }
