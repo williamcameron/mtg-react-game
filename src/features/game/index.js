@@ -18,7 +18,9 @@ class Game extends Component {
             graveyard: [],
             battlefield: [],
             mana: { 'red': 0, 'green':0 },
-            player: { 'health': 20 }
+            player: { 'health': 20 },
+            started: false,
+            turn: 1
         };
 
         this.drawCardFromDeckToHand = this.drawCardFromDeckToHand.bind(this);
@@ -28,11 +30,28 @@ class Game extends Component {
     }
 
     componentDidMount(){
+        this.setState();
+        this.initGame();
+        this.shuffleDeck();
+        // this.drawOpeningHand(); // for some reason I don't have cards to draw?
+    }
+
+    drawOpeningHand(){
+        for(let c=0;c<7;c++){
+            this.drawCardFromDeckToHand();
+        }        
+    }
+
+    shuffleDeck(){
         let deck = this.getDeck();
         this.shuffle(deck); // can we change to utilise eg. lodash?
         this.setState({deck})
     }
 
+    initGame(){
+        let started = true;
+        this.setState({started});
+    }
 
     drawCardFromDeckToHand(){
         if(this.state.deck.length){
@@ -46,16 +65,18 @@ class Game extends Component {
             alert('Nae cards left in deck');
         }
     }
-    tapUntapCard(card) {
+    tapUntapCard(card, modifyMana=true) {
         let mana = this.state.mana;
 
         card.tapped = !card.tapped;
         
         if(card.land){
-            if (card.tapped) {
-                mana.green++;
-            } else {
-                mana.green--;
+            if(modifyMana){
+                if (card.tapped) {
+                    mana.green++;
+                } else {
+                    mana.green--;
+                }
             }
         }
 
@@ -68,6 +89,19 @@ class Game extends Component {
     error(message) {
         console.log(message);
     }
+
+    unTapBattlefieldLand(number) {
+        let untapped=0;
+        if(this.state.battlefield.length){
+            for(let c=0; c<this.state.battlefield.length;c++){
+                if(this.state.battlefield[c].land && this.state.battlefield[c].tapped){
+                    this.tapUntapCard(this.state.battlefield[c], false);
+                    untapped++;
+                    if(untapped>=number) return;
+                }
+            }
+        }
+    }
     
     moveCardFromHandToBattlefield(cardToMove) {
         if(this.state.hand.length){
@@ -75,8 +109,6 @@ class Game extends Component {
             let theOne = this.state.hand.filter((card, i) => i===cardToMove)[0];
             let mana = this.state.mana;
 
-
-            console.log(theOne);
             if(theOne.creature) {
 
                 let manaConsumed = theOne.castingCost;
@@ -87,6 +119,7 @@ class Game extends Component {
                 }
 
                 mana.green -= manaConsumed;
+                this.unTapBattlefieldLand(manaConsumed);
             }
 
             let theRest = this.state.hand.filter((card, i) => i!==cardToMove);
