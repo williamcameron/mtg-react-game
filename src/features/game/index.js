@@ -65,6 +65,7 @@ class Game extends Component {
             alert('Nae cards left in deck');
         }
     }
+    
     tapUntapCard(card, modifyMana = true) {
         let mana = this.state.mana;
 
@@ -144,77 +145,61 @@ class Game extends Component {
             manaOutput.push( < Mana / > );
         }
 
-        return ( < div className = "Game" >
-            <
-            div >
-            <
-            div className = "opponentZone" > < /div>  <
-            div className = "playerZone" >
-            <
-            div className = "gameZone" >
-            <
-            Battlefield cards = { this.state.battlefield }
-            onClick = { this.tapUntapCard }
-            />  <
-            Hand cards = { this.state.hand }
-            moveCardFromHandToBattlefield = { this.moveCardFromHandToBattlefield }
-            /> </div >
-            <
-            div className = "cardZone" >
-            <
-            Deck cards = { this.state.deck }
-            onClick = { this.drawCardFromDeckToHand }
-            /> <Graveyard cards={this.state.graveyard} / >
-            <
-            strong > Health: { this.state.player.health } < /strong><br / >
-
-            <
-            strong > Mana: { this.state.mana.green } < /strong> {
-            manaOutput
-        } < /div>  < /
-        div >
-
-            <
-            /div>  < /
-        div >
-    );
-}
-
-getDeck() {
-
-    let cards = [];
-    for (let i = 0; i < 25; i++) {
-        cards.push({
-            name: 'Forest',
-            image: 'cards/forest.jpg',
-            tapped: false,
-            land: true,
-            creature: false,
-            castingCost: 0
-        });
+        return (
+            <div className="Game">
+                <div>
+                    <div className="opponentZone"></div>
+                    <div className="playerZone">
+                        <div className="gameZone">
+                            <Battlefield cards={ this.state.battlefield } onClick = { this.tapUntapCard } />
+                            <Hand cards = { this.state.hand } moveCardFromHandToBattlefield = { this.moveCardFromHandToBattlefield } />
+                        </div>
+                        <div className="cardZone">
+                            <Deck cards={ this.state.deck } onClick = { this.drawCardFromDeckToHand } />
+                            <Graveyard cards={this.state.graveyard} />
+                            <strong>Health: { this.state.player.health }</strong><br />
+                            <strong>Mana: { this.state.mana.green } </strong> {manaOutput}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        );
     }
-    for (let i = 0; i < 15; i++) {
-        cards.push({
-            name: 'Runeclaw Bear',
-            image: 'cards/runeclaw-bear.jpg',
-            tapped: false,
-            land: false,
-            creature: true,
-            castingCost: 2
-        });
+
+    getDeck() {
+
+        let cards = [];
+        for (let i = 0; i < 25; i++) {
+            cards.push({
+                name: 'Forest',
+                image: 'cards/forest.jpg',
+                tapped: false,
+                land: true,
+                creature: false,
+                castingCost: 0
+            });
+        }
+        for (let i = 0; i < 15; i++) {
+            cards.push({
+                name: 'Runeclaw Bear',
+                image: 'cards/runeclaw-bear.jpg',
+                tapped: false,
+                land: false,
+                creature: true,
+                castingCost: 2
+            });
+        }
+        return cards;
     }
-    return cards;
-}
 
-shuffle(a) {
-    for (let i = a.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [a[i], a[j]] = [a[j], a[i]];
+    shuffle(a) {
+        for (let i = a.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [a[i], a[j]] = [a[j], a[i]];
+        }
+        return a;
     }
-    return a;
-}
 
 }
-
 
 export default Game;
